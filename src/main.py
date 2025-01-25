@@ -1,12 +1,13 @@
 import flet as ft
 
 
-def main(page: ft.Page):
-    counter = ft.Text("0", size=50, data=0)
+def main(page: ft.Page) -> None:
+    counter = ft.Text(value="0", size=50)
+    counter.data = 0  # Explicitly set the type of data to int
 
-    def increment_click(e):
+    def increment_click(e: ft.ControlEvent) -> None:
         counter.data += 1
-        counter.value = str(counter.data)
+        counter.value = str(object=counter.data)
         counter.update()
 
     page.floating_action_button = ft.FloatingActionButton(
@@ -14,8 +15,8 @@ def main(page: ft.Page):
     )
     page.add(
         ft.SafeArea(
-            ft.Container(
-                counter,
+            content=ft.Container(
+                content=counter,
                 alignment=ft.alignment.center,
             ),
             expand=True,
@@ -23,4 +24,4 @@ def main(page: ft.Page):
     )
 
 
-ft.app(main)
+ft.app(target=main)
